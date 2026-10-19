@@ -4,7 +4,7 @@ import argparse
 
 
 class DFAProblem(Problem):
-
+ 
     def initialize_parser(self, parser: argparse.ArgumentParser):
         parser.add_argument(
             '--check',
@@ -21,11 +21,12 @@ class DFAProblem(Problem):
         with open(input_file, 'r') as f:
             lines = f.readlines()
 
-        states = lines[0].split()
-        alphabet = lines[1].split()
+        states = lines[0].split() 
+        alphabet = lines[1].split() 
         start_state = lines[2].strip()
         final_states = lines[3].split()
 
+        #az atmeneteket egy dictionary-be tesszuk
         transitions = {}
 
         for line in lines[4:]:
@@ -59,5 +60,6 @@ class DFAProblem(Problem):
                 result = "NEM"
 
             results.append(result)
+
         with open(output_file, 'w') as f:
             f.write("\n".join(results))
