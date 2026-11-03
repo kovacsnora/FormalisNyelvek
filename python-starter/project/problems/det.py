@@ -1,4 +1,3 @@
-
 from project.problem import Problem
 
 import argparse
@@ -54,15 +53,17 @@ class DeterminizationProblem(Problem):
             transitions[(from_state, symbol)].add(to_state)
 
         # determinizalas
-        new_states = [frozenset([start_state])]
-        new_transitions = {}
-        new_final_states = []
+        new_states = [frozenset([start_state])] #uj allapotok
+        new_transitions = {} #uj atmenetek
+        new_final_states = [] #az uj dfa vegallapotai
 
         i = 0
 
+        #feldolgozzuk az uj allapotokat
         while i < len(new_states):
             current_states = new_states[i]
 
+            #vegigmegyunk az abc-n
             for symbol in sorted(alphabet):
                 next_states = set()
 
@@ -75,6 +76,7 @@ class DeterminizationProblem(Problem):
                 if not next_states:
                     continue
 
+                #ebbe gyujtjuk az uj elerheto allapotokat
                 next_states = frozenset(next_states)
 
                 if next_states not in new_states:
@@ -82,11 +84,15 @@ class DeterminizationProblem(Problem):
 
                 j = new_states.index(next_states)
 
+                #az uj atmenet letrehozasa
                 new_transitions[(f"s{i}", symbol)] = f"s{j}"
 
             i += 1
 
         # vegallapotok meghatarozasa
+        #Egy új DFA-állapot akkor végállapot, 
+        # ha az általa képviselt halmaz 
+        # legalább egy eredeti NFA-végállapotot tartalmaz.
         for i in range(len(new_states)):
             for state in new_states[i]:
                 if state in final_states:
