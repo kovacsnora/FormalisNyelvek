@@ -45,8 +45,7 @@ class RegexProblem(Problem):
                 r'^[0-9]{2}-[0-9]{2} .*?\s+E\s+[^:]+:',
                 r'^[0-9]{2}-[0-9]{2} .*?\s+W\s+PackageManager:',
                 r'^[0-9]{2}-[0-9]{2} .*?\s+D\s+[^:]*ExoPlayer[^:]*:',                r'^[0-9]{2}-[0-9]{2} .*?\s+[EW]\s+[^:]+:.*\.java:',
-                r'^[0-9]{2}-[0-9]{2} .*?\s+[IDVEFAW]\s+[^:]+:.*Thread'
-            ]
+                r'^[0-9]{2}-[0-9]{2} .*?\s+[IDVEFAW]\s+[^:]+:.*\bThread\b'            ]
 
             for regex in patterns:
                 count = 0
